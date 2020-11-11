@@ -20,7 +20,7 @@ socket.on('connect', () => {
     console.log('Connected to server');
 
     socket.emit('enterChat', user, (response) => {
-        console.log('Connected users:', response);
+        renderUsers(user.room, response);
     });
 });
 
@@ -37,7 +37,7 @@ socket.on('disconnect', () => {
 
 // Get a message.
 socket.on('publicMessage', (data) => {
-    console.log('Public message:', data);
+    renderMessages(data, false);
 });
 
 // Get a private message.
@@ -47,5 +47,5 @@ socket.on('privateMessage', (data) => {
 
 // Get people list.
 socket.on('listPeople', (peopleList) => {
-    console.log('Connected users:', peopleList);
+    renderUsers(user.room, peopleList);
 });
